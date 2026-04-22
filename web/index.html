@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foglight — Connect AI Agents to Live Infrastructure</title>
+  <meta name="description" content="Connect AI agents to your infrastructure. Simple setup. Secure by design. Open source.">
+  <meta property="og:title" content="Foglight — Coming Soon">
+  <meta property="og:description" content="Connect AI agents to your infrastructure. Simple setup. Secure by design. Open source.">
+  <meta property="og:url" content="https://foglight.co">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Foglight — Coming Soon">
+  <meta name="twitter:description" content="Connect AI agents to your infrastructure. Simple setup. Secure by design. Open source.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg width='512' height='512' viewBox='0 0 512 512' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='512' height='512' rx='108' ry='108' fill='%230B1528'/%3E%3Cg transform='translate(106,106) scale(10)'%3E%3Cpath d='M0 2.5C0 1.119 1.119 0 2.5 0H5.5C6.881 0 8 1.119 8 2.5V5.5C8 6.881 6.881 8 5.5 8H2.5C1.119 8 0 6.881 0 5.5V2.5Z' fill='%230088FF'/%3E%3Cpath d='M11 2.5C11 1.119 12.119 0 13.5 0H16.5C17.881 0 19 1.119 19 2.5V5.5C19 6.881 17.881 8 16.5 8H13.5C12.119 8 11 6.881 11 5.5V2.5Z' fill='%2355AAFF'/%3E%3Cpath d='M22 2.5C22 1.119 23.119 0 24.5 0H27.5C28.881 0 30 1.119 30 2.5V5.5C30 6.881 28.881 8 27.5 8H24.5C23.119 8 22 6.881 22 5.5V2.5Z' fill='%23B3DDFF'/%3E%3Cpath d='M0 13.5C0 12.119 1.119 11 2.5 11H5.5C6.881 11 8 12.119 8 13.5V16.5C8 17.881 6.881 19 5.5 19H2.5C1.119 19 0 17.881 0 16.5V13.5Z' fill='%2355AAFF'/%3E%3Cpath d='M11 13.5C11 12.119 12.119 11 13.5 11H16.5C17.881 11 19 12.119 19 13.5V16.5C19 17.881 17.881 19 16.5 19H13.5C12.119 19 11 17.881 11 16.5V13.5Z' fill='%23B3DDFF'/%3E%3Cpath d='M0 24.5C0 23.119 1.119 22 2.5 22H5.5C6.881 22 8 23.119 8 24.5V27.5C8 28.881 6.881 30 5.5 30H2.5C1.119 30 0 28.881 0 27.5V24.5Z' fill='%23B3DDFF'/%3E%3C/g%3E%3C/svg%3E">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; overflow: hidden; }
+
+    body {
+      background: #000000;
+      color: #B3DDFF;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    #particles-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+    .container {
+      text-align: center;
+      z-index: 1;
+      padding: 2rem;
+      animation: fade-in 1.2s ease-out both;
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 2rem;
+      border-radius: 18px;
+      animation: glow 4s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+      0%, 100% { filter: drop-shadow(0 0 8px rgba(0, 136, 255, 0.3)); }
+      50% { filter: drop-shadow(0 0 24px rgba(0, 136, 255, 0.7)); }
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .tagline {
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #55AAFF;
+      margin-bottom: 2rem;
+    }
+
+    .description {
+      font-size: 1.125rem;
+      line-height: 1.7;
+      color: rgba(179, 221, 255, 0.7);
+      max-width: 440px;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* Shimmer button — ported from Magic UI shimmer-button.tsx */
+    .shimmer-btn {
+      --shimmer-color: #0088FF;
+      --bg: rgba(0, 0, 0, 1);
+      --radius: 8px;
+      --speed: 3s;
+      --spread: 90deg;
+      --cut: 0.05em;
+      position: relative;
+      z-index: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.9375rem;
+      font-weight: 500;
+      background: var(--bg);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .btn-group {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .shimmer-btn:active { transform: translateY(1px); }
+    .shimmer-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+    .shimmer-btn::before {
+      content: '';
+      position: absolute;
+      inset: -100%;
+      z-index: -3;
+      background: conic-gradient(
+        from calc(270deg - (var(--spread) * 0.5)),
+        transparent 0, var(--shimmer-color) var(--spread), transparent var(--spread)
+      );
+      animation: spin-around var(--speed) linear infinite;
+      filter: blur(2px);
+    }
+
+    .shimmer-btn::after {
+      content: '';
+      position: absolute;
+      inset: var(--cut);
+      z-index: -2;
+      border-radius: var(--radius);
+      background: var(--bg);
+    }
+
+    .shimmer-btn .highlight {
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius);
+      box-shadow: inset 0 -8px 10px rgba(255, 255, 255, 0.06);
+      transition: box-shadow 0.3s ease;
+      pointer-events: none;
+    }
+    .shimmer-btn:hover .highlight {
+      box-shadow: inset 0 -6px 10px rgba(255, 255, 255, 0.12);
+    }
+
+    @keyframes spin-around {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 480px) {
+      h1 { font-size: 1.75rem; }
+      .description { font-size: 1rem; }
+      .logo { width: 64px; height: 64px; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles-canvas"></canvas>
+
+  <div class="container">
+    <svg class="logo" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="512" height="512" rx="108" ry="108" fill="#000000"/>
+      <g transform="translate(106, 106) scale(10)">
+        <path d="M0 2.5C0 1.11929 1.11929 0 2.5 0H5.5C6.88071 0 8 1.11929 8 2.5V5.5C8 6.88071 6.88071 8 5.5 8H2.5C1.11929 8 0 6.88071 0 5.5V2.5Z" fill="#0088FF"/>
+        <path d="M11 2.5C11 1.11929 12.1193 0 13.5 0H16.5C17.8807 0 19 1.11929 19 2.5V5.5C19 6.88071 17.8807 8 16.5 8H13.5C12.1193 8 11 6.88071 11 5.5V2.5Z" fill="#55AAFF"/>
+        <path d="M22 2.5C22 1.11929 23.1193 0 24.5 0H27.5C28.8807 0 30 1.11929 30 2.5V5.5C30 6.88071 28.8807 8 27.5 8H24.5C23.1193 8 22 6.88071 22 5.5V2.5Z" fill="#B3DDFF"/>
+        <path d="M0 13.5C0 12.1193 1.11929 11 2.5 11H5.5C6.88071 11 8 12.1193 8 13.5V16.5C8 17.8807 6.88071 19 5.5 19H2.5C1.11929 19 0 17.8807 0 16.5V13.5Z" fill="#55AAFF"/>
+        <path d="M11 13.5C11 12.1193 12.1193 11 13.5 11H16.5C17.8807 11 19 12.1193 19 13.5V16.5C19 17.8807 17.8807 19 16.5 19H13.5C12.1193 19 11 17.8807 11 16.5V13.5Z" fill="#B3DDFF"/>
+        <path d="M0 24.5C0 23.1193 1.11929 22 2.5 22H5.5C6.88071 22 8 23.1193 8 24.5V27.5C8 28.8807 6.88071 30 5.5 30H2.5C1.11929 30 0 28.8807 0 27.5V24.5Z" fill="#B3DDFF"/>
+      </g>
+    </svg>
+
+    <h1>Foglight</h1>
+    <p class="tagline">Coming Soon</p>
+    <p class="description">
+      Connect AI agents to your infrastructure.
+      Simple setup. Secure by design. Open source.
+    </p>
+    <div class="btn-group">
+      <a href="https://github.com/eph5xx/foglight" target="_blank" rel="noopener noreferrer" class="shimmer-btn">
+        <span class="highlight"></span>
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        Star on GitHub
+      </a>
+      <a href="https://docs.foglight.co" target="_blank" rel="noopener noreferrer" class="shimmer-btn">
+        <span class="highlight"></span>
+        <svg viewBox="0 0 335 338" xmlns="http://www.w3.org/2000/svg"><path d="M331.596 125.814V23.0709C331.596 12.0456 322.652 3.25732 311.791 3.25732H209.096C192.965 3.25732 176.994 6.45294 162.141 12.5248C147.287 18.7565 133.712 27.7047 122.372 39.2093L121.574 40.0083C106.561 55.188 95.8599 74.0427 90.4297 94.815C100.172 92.2584 110.234 90.9801 120.296 90.8204C147.127 90.5008 173.48 99.1293 194.882 115.268C214.207 129.649 228.9 149.462 236.886 172.312C245.191 195.481 246.149 220.727 239.921 244.535C260.524 239.103 279.53 228.397 294.703 213.377L295.501 212.578C306.841 201.233 315.944 187.651 322.173 172.791C328.402 157.931 331.437 141.952 331.437 125.814H331.596Z" fill="#18E299"/><path d="M87.3642 124.079C87.5233 92.5605 100.093 62.3154 122.209 39.7112L36.7663 125.193C36.4481 125.512 36.1297 125.671 35.8115 125.989C14.9679 146.683 2.39839 174.381 0.329946 203.671C-1.57939 231.051 5.58047 258.112 20.8552 280.717C22.3121 282.873 26.2654 283.582 28.493 281.513L80.8405 229.3C97.2289 212.904 102.321 188.549 94.5242 166.74C89.5917 153.21 87.2051 138.724 87.3642 124.079Z" fill="#0C8C5E"/><path d="M295.003 212.587C278.615 228.664 258.089 239.807 235.813 244.742C213.379 249.677 190.149 248.244 168.51 240.603C168.51 240.603 168.35 240.603 168.191 240.603C146.393 232.803 122.049 237.897 105.661 254.134L53.3124 306.346C51.0848 308.575 51.403 312.236 54.1079 313.987C76.7017 329.11 103.751 336.432 131.118 334.522C160.395 332.453 187.921 319.877 208.764 299.024L209.56 298.228L295.003 212.746V212.587Z" fill="#0C8C5E"/></svg>
+        Explore Docs
+      </a>
+    </div>
+  </div>
+
+  <!-- Particles effect — ported from Magic UI particles.tsx -->
+  <script>
+    (function () {
+      const canvas = document.getElementById('particles-canvas');
+      const ctx = canvas.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+
+      const QUANTITY = 80;
+      const COLOR = [0, 136, 255]; // #0088FF
+      const SIZE = 0.4;
+      const STATICITY = 50;
+      const EASE = 50;
+
+      let w = 0, h = 0;
+      let circles = [];
+      let mouse = { x: 0, y: 0 };
+      let rafId = null;
+      let resizeTimer = null;
+
+      function resize() {
+        w = window.innerWidth;
+        h = window.innerHeight;
+        canvas.width = w * dpr;
+        canvas.height = h * dpr;
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+        ctx.scale(dpr, dpr);
+        circles = [];
+        for (let i = 0; i < QUANTITY; i++) {
+          circles.push(createCircle());
+        }
+      }
+
+      function createCircle() {
+        return {
+          x: Math.floor(Math.random() * w),
+          y: Math.floor(Math.random() * h),
+          translateX: 0,
+          translateY: 0,
+          size: Math.floor(Math.random() * 2) + SIZE,
+          alpha: 0,
+          targetAlpha: parseFloat((Math.random() * 0.6 + 0.1).toFixed(1)),
+          dx: (Math.random() - 0.5) * 0.1,
+          dy: (Math.random() - 0.5) * 0.1,
+          magnetism: 0.1 + Math.random() * 4,
+        };
+      }
+
+      function drawCircle(c) {
+        ctx.translate(c.translateX, c.translateY);
+        ctx.beginPath();
+        ctx.arc(c.x, c.y, c.size, 0, 2 * Math.PI);
+        ctx.fillStyle = `rgba(${COLOR[0]}, ${COLOR[1]}, ${COLOR[2]}, ${c.alpha})`;
+        ctx.fill();
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      function remap(value, low1, high1, low2, high2) {
+        let r = ((value - low1) * (high2 - low2)) / (high1 - low1) + low2;
+        return r > 0 ? r : 0;
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, w, h);
+        for (let i = circles.length - 1; i >= 0; i--) {
+          let c = circles[i];
+
+          // Edge fade
+          let edges = [
+            c.x + c.translateX - c.size,
+            w - c.x - c.translateX - c.size,
+            c.y + c.translateY - c.size,
+            h - c.y - c.translateY - c.size,
+          ];
+          let closest = Math.min(...edges);
+          let remapped = parseFloat(remap(closest, 0, 20, 0, 1).toFixed(2));
+          if (remapped > 1) {
+            c.alpha += 0.02;
+            if (c.alpha > c.targetAlpha) c.alpha = c.targetAlpha;
+          } else {
+            c.alpha = c.targetAlpha * remapped;
+          }
+
+          c.x += c.dx;
+          c.y += c.dy;
+
+          // Mouse magnetism
+          c.translateX += (mouse.x / (STATICITY / c.magnetism) - c.translateX) / EASE;
+          c.translateY += (mouse.y / (STATICITY / c.magnetism) - c.translateY) / EASE;
+
+          drawCircle(c);
+
+          // Out of bounds — recycle
+          if (c.x < -c.size || c.x > w + c.size || c.y < -c.size || c.y > h + c.size) {
+            circles.splice(i, 1);
+            circles.push(createCircle());
+          }
+        }
+        rafId = requestAnimationFrame(animate);
+      }
+
+      window.addEventListener('mousemove', function (e) {
+        mouse.x = e.clientX - w / 2;
+        mouse.y = e.clientY - h / 2;
+      });
+
+      window.addEventListener('resize', function () {
+        if (resizeTimer) clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+          ctx.setTransform(1, 0, 0, 1, 0, 0);
+          resize();
+        }, 200);
+      });
+
+      resize();
+      animate();
+    })();
+  </script>
+</body>
+</html>
