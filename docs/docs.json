@@ -1,0 +1,29 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Foglight",
+  "logo": {
+    "dark": "/foglight.svg",
+    "light": "/foglight.svg"
+  },
+  "favicon": "/foglight.svg",
+  "colors": {
+    "primary": "#0088FF",
+    "light": "#55AAFF",
+    "dark": "#0066CC"
+  },
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/intro"
+    }
+  ],
+  "navigation": {
+    "groups": [
+      {
+        "group": "Getting Started",
+        "pages": ["intro"]
+      }
+    ]
+  }
+}
