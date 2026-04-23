@@ -157,6 +157,13 @@
       .description { font-size: 1rem; }
       .logo { width: 64px; height: 64px; }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .container { animation: none; }
+      .logo { animation: none; }
+      .shimmer-btn::before { animation: none; }
+      #particles-canvas { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -198,6 +205,9 @@
   <!-- Particles effect — ported from Magic UI particles.tsx -->
   <script>
     (function () {
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        return;
+      }
       const canvas = document.getElementById('particles-canvas');
       const ctx = canvas.getContext('2d');
       const dpr = window.devicePixelRatio || 1;
