@@ -6,6 +6,7 @@ import (
 
 	"github.com/eph5xx/foglight/pkg/connectors/github"
 	"github.com/eph5xx/foglight/pkg/connectors/linear"
+	"github.com/eph5xx/foglight/pkg/connectors/slack"
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 )
 
@@ -25,6 +26,10 @@ func main() {
 	}
 
 	if err := linear.Register(server); err != nil {
+		log.Fatalf("foglight: %v", err)
+	}
+
+	if err := slack.Register(server); err != nil {
 		log.Fatalf("foglight: %v", err)
 	}
 
