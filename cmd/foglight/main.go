@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/eph5xx/foglight/pkg/connectors/github"
+	"github.com/eph5xx/foglight/pkg/connectors/linear"
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 )
 
@@ -20,6 +21,10 @@ func main() {
 	}, nil)
 
 	if err := github.Register(server); err != nil {
+		log.Fatalf("foglight: %v", err)
+	}
+
+	if err := linear.Register(server); err != nil {
 		log.Fatalf("foglight: %v", err)
 	}
 
