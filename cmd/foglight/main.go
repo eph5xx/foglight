@@ -1,7 +1,29 @@
 package main
 
-import "fmt"
+import (
+	"context"
+	"log"
+
+	"github.com/eph5xx/foglight/pkg/connectors/github"
+	"github.com/modelcontextprotocol/go-sdk/mcp"
+)
+
+const (
+	serverName    = "foglight"
+	serverVersion = "v0.1.0"
+)
 
 func main() {
-	fmt.Println("Foglight is here")
+	server := mcp.NewServer(&mcp.Implementation{
+		Name:    serverName,
+		Version: serverVersion,
+	}, nil)
+
+	if err := github.Register(server); err != nil {
+		log.Fatalf("foglight: %v", err)
+	}
+
+	if err := server.Run(context.Background(), &mcp.StdioTransport{}); err != nil {
+		log.Fatalf("foglight: %v", err)
+	}
 }
