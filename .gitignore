@@ -29,3 +29,6 @@ go.work.sum
 
 # Build output
 bin/
+
+# Local claude files
+.claude
