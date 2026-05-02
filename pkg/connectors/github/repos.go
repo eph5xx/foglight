@@ -15,59 +15,59 @@ const (
 	maxBodyChars = 16000
 )
 
-func addReposTools(server *mcp.Server, client *gh.Client) {
+func addReposTools(server *mcp.Server, name string, client *gh.Client) {
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "github_get_file_contents",
+		Name:        name + "_get_file_contents",
 		Description: "Get a file or directory at path in a repo. Files return decoded content (truncated for large files); directories return entry listings.",
 	}, getFileContents(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "github_search_code",
+		Name:        name + "_search_code",
 		Description: "Search code across GitHub using GitHub's code search syntax.",
 	}, searchCode(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "github_search_repositories",
+		Name:        name + "_search_repositories",
 		Description: "Search repositories using GitHub's search syntax.",
 	}, searchRepositories(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "github_list_commits",
+		Name:        name + "_list_commits",
 		Description: "List commits on a repo branch/path with optional author/since/until filters.",
 	}, listCommits(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "github_get_commit",
+		Name:        name + "_get_commit",
 		Description: "Get a single commit by SHA. With include_diff=true, includes per-file patches (truncated).",
 	}, getCommit(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "github_list_branches",
+		Name:        name + "_list_branches",
 		Description: "List branches in a repo. Optional protected filter.",
 	}, listBranches(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "github_list_tags",
+		Name:        name + "_list_tags",
 		Description: "List tags in a repo (lightweight, with referenced commit SHA and tarball URLs).",
 	}, listTags(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "github_get_tag",
+		Name:        name + "_get_tag",
 		Description: "Get details for a tag by name. Returns the ref's target commit SHA; for annotated tags also returns the tag message and tagger.",
 	}, getTag(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "github_list_releases",
+		Name:        name + "_list_releases",
 		Description: "List releases in a repo, most recent first.",
 	}, listReleases(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "github_get_latest_release",
+		Name:        name + "_get_latest_release",
 		Description: "Get the latest published (non-draft, non-prerelease) release for a repo.",
 	}, getLatestRelease(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "github_get_release_by_tag",
+		Name:        name + "_get_release_by_tag",
 		Description: "Get a release by its tag name.",
 	}, getReleaseByTag(client))
 }

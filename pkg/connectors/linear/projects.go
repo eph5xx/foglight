@@ -14,14 +14,14 @@ const (
 	maxProjectMilestones   = 50
 )
 
-func addProjectTools(server *mcp.Server, client *Client) {
+func addProjectTools(server *mcp.Server, name string, client *Client) {
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "linear_list_projects",
+		Name:        name + "_list_projects",
 		Description: "List Linear projects. Filters: team_key (any accessible team), status (backlog|planned|started|paused|completed|canceled), lead_id.",
 	}, listProjects(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "linear_get_project",
+		Name:        name + "_get_project",
 		Description: "Get a single Linear project by UUID. Returns description, long-form content, status, lead, members, and milestones. Does not inline issues — use linear_list_issues with project_id.",
 	}, getProject(client))
 }

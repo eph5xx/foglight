@@ -7,9 +7,9 @@ import (
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 )
 
-func addCycleTools(server *mcp.Server, client *Client) {
+func addCycleTools(server *mcp.Server, name string, client *Client) {
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "linear_list_cycles",
+		Name:        name + "_list_cycles",
 		Description: "List cycles (sprints). team_id scopes to a single team; type filters to current|previous|next.",
 	}, listCycles(client))
 }

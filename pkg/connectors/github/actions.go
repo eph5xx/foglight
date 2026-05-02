@@ -14,19 +14,19 @@ import (
 
 const maxLogChars = 32000
 
-func addActionsTools(server *mcp.Server, client *gh.Client) {
+func addActionsTools(server *mcp.Server, name string, client *gh.Client) {
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "github_get_action",
+		Name:        name + "_get_action",
 		Description: "Get a single Actions resource. method selects which: workflow, run, job, artifact, or logs (alias for fetching a single job's logs).",
 	}, getAction(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "github_list_actions",
+		Name:        name + "_list_actions",
 		Description: "List Actions resources. method selects which: workflows, runs, jobs (requires run_id), or artifacts (requires run_id).",
 	}, listActions(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "github_get_job_logs",
+		Name:        name + "_get_job_logs",
 		Description: "Download workflow job logs. Provide job_id for a single job, or run_id (optionally with failed_only=true) for all/failed jobs in a run. Logs are truncated.",
 	}, getJobLogs(client))
 }

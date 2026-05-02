@@ -51,9 +51,10 @@ func (c *Connector) Register(server *mcp.Server) error {
 	if c.client == nil {
 		return errors.New("github connector: not configured")
 	}
-	addActionsTools(server, c.client)
-	addContextTools(server, c.client)
-	addPullRequestTools(server, c.client)
-	addReposTools(server, c.client)
+	name := c.Name()
+	addActionsTools(server, name, c.client)
+	addContextTools(server, name, c.client)
+	addPullRequestTools(server, name, c.client)
+	addReposTools(server, name, c.client)
 	return nil
 }

@@ -16,19 +16,19 @@ const (
 	maxUnreadMessagesPerConv    = 50
 )
 
-func addConversationTools(server *mcp.Server, client *slacksdk.Client) {
+func addConversationTools(server *mcp.Server, name string, client *slacksdk.Client) {
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "slack_read_channel",
+		Name:        name + "_read_channel",
 		Description: "Read recent messages from a channel or DM by channel_id. Supports oldest/latest Unix-second timestamps and a limit. Cursor-paginated.",
 	}, readChannel(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "slack_read_thread",
+		Name:        name + "_read_thread",
 		Description: "Read a full thread by channel_id + thread_ts. Threads are usually higher-signal than channel surface — go here for decision context.",
 	}, readThread(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "slack_unreads",
+		Name:        name + "_unreads",
 		Description: "Aggregate unread messages across the user's DMs and channels. Best-effort: iterates user's conversations (default 30, max 100) and pulls messages newer than each last_read marker. Slow on large workspaces. mentions_only=true filters to plain @-you mentions only — does not match @-here, @-channel, or usergroup mentions.",
 	}, unreads(client))
 }

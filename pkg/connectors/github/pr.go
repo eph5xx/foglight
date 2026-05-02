@@ -11,19 +11,19 @@ import (
 
 const maxPatchChars = 8000
 
-func addPullRequestTools(server *mcp.Server, client *gh.Client) {
+func addPullRequestTools(server *mcp.Server, name string, client *gh.Client) {
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "github_list_pull_requests",
+		Name:        name + "_list_pull_requests",
 		Description: "List pull requests for a repo. Returns summaries (number, title, state, author, base/head, draft, URL, timestamps).",
 	}, listPRs(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "github_read_pull_request",
+		Name:        name + "_read_pull_request",
 		Description: "Read a single pull request in full: metadata, body, changed files with patches, reviews, review comments, and issue comments.",
 	}, readPR(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "github_search_pull_requests",
+		Name:        name + "_search_pull_requests",
 		Description: "Search pull requests using GitHub's search syntax. The query is automatically scoped to PRs (is:pr is prepended if absent).",
 	}, searchPRs(client))
 }

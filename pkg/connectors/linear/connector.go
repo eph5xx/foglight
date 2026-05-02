@@ -54,12 +54,13 @@ func (c *Connector) Register(server *mcp.Server) error {
 	if c.client == nil {
 		return errors.New("linear connector: not configured")
 	}
-	addIssueTools(server, c.client)
-	addProjectTools(server, c.client)
-	addOrgTools(server, c.client)
-	addCommentTools(server, c.client)
-	addTaxonomyTools(server, c.client)
-	addCycleTools(server, c.client)
-	addDocumentTools(server, c.client)
+	name := c.Name()
+	addIssueTools(server, name, c.client)
+	addProjectTools(server, name, c.client)
+	addOrgTools(server, name, c.client)
+	addCommentTools(server, name, c.client)
+	addTaxonomyTools(server, name, c.client)
+	addCycleTools(server, name, c.client)
+	addDocumentTools(server, name, c.client)
 	return nil
 }

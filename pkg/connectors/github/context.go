@@ -9,24 +9,24 @@ import (
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 )
 
-func addContextTools(server *mcp.Server, client *gh.Client) {
+func addContextTools(server *mcp.Server, name string, client *gh.Client) {
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "github_get_me",
+		Name:        name + "_get_me",
 		Description: "Get the authenticated user's profile (login, name, email, bio, counts, timestamps).",
 	}, getMe(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "github_get_teams",
+		Name:        name + "_get_teams",
 		Description: "List teams. With no input, returns the authenticated user's teams. With org, returns all teams in that org.",
 	}, getTeams(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "github_get_team_members",
+		Name:        name + "_get_team_members",
 		Description: "List members of a team in an org. Required: org, team_slug.",
 	}, getTeamMembers(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "github_search_users",
+		Name:        name + "_search_users",
 		Description: "Search GitHub users using GitHub's search syntax.",
 	}, searchUsers(client))
 }

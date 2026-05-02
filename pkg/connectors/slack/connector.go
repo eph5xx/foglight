@@ -73,10 +73,11 @@ func (c *Connector) Register(server *mcp.Server) error {
 	if c.client == nil {
 		return errors.New("slack connector: not configured")
 	}
-	addChannelTools(server, c.client)
-	addConversationTools(server, c.client)
-	addSearchTools(server, c.client)
-	addUserTools(server, c.client)
-	addUsergroupTools(server, c.client)
+	name := c.Name()
+	addChannelTools(server, name, c.client)
+	addConversationTools(server, name, c.client)
+	addSearchTools(server, name, c.client)
+	addUserTools(server, name, c.client)
+	addUsergroupTools(server, name, c.client)
 	return nil
 }
