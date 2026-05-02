@@ -10,14 +10,14 @@ import (
 
 const maxDocumentContentChars = 32000
 
-func addDocumentTools(server *mcp.Server, client *Client) {
+func addDocumentTools(server *mcp.Server, name string, client *Client) {
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "linear_list_documents",
+		Name:        name + "_list_documents",
 		Description: "List Linear Docs (workspace wiki). Filter by project_id, creator_id, or updated_since. Returns summaries without content.",
 	}, listDocuments(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "linear_get_document",
+		Name:        name + "_get_document",
 		Description: "Get a single Linear Doc by UUID, including its full content (truncated).",
 	}, getDocument(client))
 }

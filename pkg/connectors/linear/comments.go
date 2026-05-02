@@ -8,9 +8,9 @@ import (
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 )
 
-func addCommentTools(server *mcp.Server, client *Client) {
+func addCommentTools(server *mcp.Server, name string, client *Client) {
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "linear_list_comments",
+		Name:        name + "_list_comments",
 		Description: "List comments on a Linear issue. issue_id accepts UUID or human identifier (e.g. 'ENG-123'). Cursor-paginated. Bodies are truncated.",
 	}, listComments(client))
 }

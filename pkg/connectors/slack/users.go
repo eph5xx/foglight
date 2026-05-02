@@ -21,9 +21,9 @@ const (
 	maxUsersScanned = 5000
 )
 
-func addUserTools(server *mcp.Server, client *slacksdk.Client) {
+func addUserTools(server *mcp.Server, name string, client *slacksdk.Client) {
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "slack_search_users",
+		Name:        name + "_search_users",
 		Description: "Find users by email (exact, fast path via users.lookupByEmail) or by name/handle substring (case-insensitive across realName, displayName, and username; backed by users.list). Returns user IDs you can pass to other tools.",
 	}, searchUsers(client))
 }

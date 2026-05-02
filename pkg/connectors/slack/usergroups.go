@@ -8,14 +8,14 @@ import (
 	slacksdk "github.com/slack-go/slack"
 )
 
-func addUsergroupTools(server *mcp.Server, client *slacksdk.Client) {
+func addUsergroupTools(server *mcp.Server, name string, client *slacksdk.Client) {
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "slack_list_usergroups",
+		Name:        name + "_list_usergroups",
 		Description: "List all subteams (usergroups) in the workspace. Use this to find the right group ID by name/handle. Optional flags surface members and counts.",
 	}, listUsergroups(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "slack_my_usergroups",
+		Name:        name + "_my_usergroups",
 		Description: "List subteams the calling user belongs to. Read-only; does not join or leave groups.",
 	}, myUsergroups(client))
 }

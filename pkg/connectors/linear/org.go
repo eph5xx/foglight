@@ -10,24 +10,24 @@ import (
 
 const maxTeamDescChars = 4000
 
-func addOrgTools(server *mcp.Server, client *Client) {
+func addOrgTools(server *mcp.Server, name string, client *Client) {
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "linear_list_teams",
+		Name:        name + "_list_teams",
 		Description: "List all teams in the workspace.",
 	}, listTeams(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "linear_get_team",
+		Name:        name + "_get_team",
 		Description: "Get a single team by UUID or team key (e.g. 'ENG'). Includes description, timezone, issue count, and cycles enabled/duration.",
 	}, getTeam(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "linear_list_users",
+		Name:        name + "_list_users",
 		Description: "List all active users in the workspace.",
 	}, listUsers(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "linear_get_user",
+		Name:        name + "_get_user",
 		Description: "Get a single user by UUID.",
 	}, getUser(client))
 }

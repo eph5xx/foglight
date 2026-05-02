@@ -16,19 +16,19 @@ const (
 	maxChildrenPerIssue = 50
 )
 
-func addIssueTools(server *mcp.Server, client *Client) {
+func addIssueTools(server *mcp.Server, name string, client *Client) {
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "linear_list_issues",
+		Name:        name + "_list_issues",
 		Description: "List Linear issues with filters (team_key, state_type, assignee_id, project_id, label, updated_since). Cursor-paginated; returns summaries without descriptions.",
 	}, listIssues(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "linear_get_issue",
+		Name:        name + "_get_issue",
 		Description: "Get a single Linear issue by UUID or human identifier (e.g. 'ENG-123'). Includes description, labels, sub-issues, and inline comment thread.",
 	}, getIssue(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "linear_list_my_issues",
+		Name:        name + "_list_my_issues",
 		Description: "List issues assigned to the authenticated user. Optional state_type filter.",
 	}, listMyIssues(client))
 }

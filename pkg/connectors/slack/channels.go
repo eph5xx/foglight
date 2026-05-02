@@ -9,9 +9,9 @@ import (
 	slacksdk "github.com/slack-go/slack"
 )
 
-func addChannelTools(server *mcp.Server, client *slacksdk.Client) {
+func addChannelTools(server *mcp.Server, name string, client *slacksdk.Client) {
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "slack_list_channels",
+		Name:        name + "_list_channels",
 		Description: "List channels in the workspace, optionally filtered by type (public_channel, private_channel, mpim, im). Cursor-paginated. Resolve channel IDs here before calling slack_read_channel.",
 	}, listChannels(client))
 }

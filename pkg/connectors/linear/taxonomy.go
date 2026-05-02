@@ -8,24 +8,24 @@ import (
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 )
 
-func addTaxonomyTools(server *mcp.Server, client *Client) {
+func addTaxonomyTools(server *mcp.Server, name string, client *Client) {
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "linear_list_issue_statuses",
+		Name:        name + "_list_issue_statuses",
 		Description: "List workflow states (issue statuses) with optional team_id and type filters. Type is one of: triage|backlog|unstarted|started|completed|canceled.",
 	}, listIssueStatuses(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "linear_get_issue_status",
+		Name:        name + "_get_issue_status",
 		Description: "Get a single workflow state (issue status) by UUID.",
 	}, getIssueStatus(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "linear_list_issue_labels",
+		Name:        name + "_list_issue_labels",
 		Description: "List issue labels. Optional team_id scopes to a single team; absent returns all labels visible to the caller (including workspace-level labels).",
 	}, listIssueLabels(client))
 
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "linear_list_project_labels",
+		Name:        name + "_list_project_labels",
 		Description: "List project labels for the workspace.",
 	}, listProjectLabels(client))
 }

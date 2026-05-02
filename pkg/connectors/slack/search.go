@@ -14,9 +14,9 @@ const (
 	maxSearchCount     = 100
 )
 
-func addSearchTools(server *mcp.Server, client *slacksdk.Client) {
+func addSearchTools(server *mcp.Server, name string, client *slacksdk.Client) {
 	mcp.AddTool(server, &mcp.Tool{
-		Name:        "slack_search_messages",
+		Name:        name + "_search_messages",
 		Description: "Search messages workspace-wide using Slack search operators (in:#channel, from:@user, before:YYYY-MM-DD, after:, on:, has::eyes:, etc.). Returns message permalinks plus surrounding context. Page-based pagination (1-indexed). Note: bot tokens cannot use this; xoxc/xoxp only.",
 	}, searchMessages(client))
 }
