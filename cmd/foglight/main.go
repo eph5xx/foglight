@@ -10,6 +10,7 @@ import (
 	"github.com/eph5xx/foglight/pkg/connectors"
 	"github.com/eph5xx/foglight/pkg/connectors/github"
 	"github.com/eph5xx/foglight/pkg/connectors/linear"
+	"github.com/eph5xx/foglight/pkg/connectors/notion"
 	"github.com/eph5xx/foglight/pkg/connectors/slack"
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 )
@@ -32,6 +33,7 @@ func main() {
 	list := []connectors.Connector{
 		github.New(),
 		linear.New(),
+		notion.New(),
 		slack.New(),
 	}
 
