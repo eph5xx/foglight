@@ -7,7 +7,10 @@ import (
 	"runtime/debug"
 
 	"github.com/eph5xx/foglight/pkg/connector"
-	"github.com/eph5xx/foglight/pkg/services/dummy"
+	"github.com/eph5xx/foglight/pkg/services/github"
+	"github.com/eph5xx/foglight/pkg/services/linear"
+	"github.com/eph5xx/foglight/pkg/services/notion"
+	"github.com/eph5xx/foglight/pkg/services/slack"
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 )
 
@@ -67,8 +70,14 @@ func Run(ctx context.Context, cfg *Config) error {
 
 func newConnector(e ConnectorEntry) (connector.Connector, error) {
 	switch e.Name {
-	case "dummy":
-		return dummy.NewFromYAML(e.Config)
+	case "notion":
+		return notion.NewFromYAML(e.Config)
+	case "slack":
+		return slack.NewFromYAML(e.Config)
+	case "linear":
+		return linear.NewFromYAML(e.Config)
+	case "github":
+		return github.NewFromYAML(e.Config)
 	default:
 		return nil, fmt.Errorf("unknown connector %q", e.Name)
 	}

@@ -1,4 +1,4 @@
-package dummy
+package notion
 
 import (
 	"context"
@@ -23,23 +23,21 @@ func NewFromYAML(node yaml.Node) (*Connector, error) {
 	return &Connector{cfg: cfg}, nil
 }
 
-func (*Connector) Name() string                          { return "dummy" }
+func (*Connector) Name() string                          { return "notion" }
 func (*Connector) Auth(ctx context.Context) error        { return nil }
 func (*Connector) HealthCheck(ctx context.Context) error { return nil }
 
-type AddInput struct {
-	A float64 `json:"a" jsonschema:"first addend"`
-	B float64 `json:"b" jsonschema:"second addend"`
-}
+type PingInput struct{}
 
-type AddOutput struct {
-	Sum float64 `json:"sum" jsonschema:"sum of a and b"`
+type PingOutput struct {
+	Status  string `json:"status" jsonschema:"liveness status, always \"ok\""`
+	Service string `json:"service" jsonschema:"name of the service"`
 }
 
 func (c *Connector) Register(r connector.Registry) error {
-	return connector.RegisterTool(r, "add", "Add two numbers", c.add)
+	return connector.RegisterTool(r, "notion_ping", "Ping the Notion stub connector", c.ping)
 }
 
-func (*Connector) add(_ context.Context, in AddInput) (AddOutput, error) {
-	return AddOutput{Sum: in.A + in.B}, nil
+func (c *Connector) ping(_ context.Context, _ PingInput) (PingOutput, error) {
+	return PingOutput{Status: "ok", Service: c.Name()}, nil
 }
